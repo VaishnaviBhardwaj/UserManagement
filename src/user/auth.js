@@ -20,8 +20,6 @@ async function checkUser(req,res,next){
         let decodeToken = jwt.decode(idToken)
         let role = decodeToken.tokenbody.usertype
         let username =  decodeToken.tokenbody.username
-        console.log("Inside the Client",role,">>>>",role === client && url === '/project')
-
         if(role === client && url === '/project'){
             let userDetails = await User.findOne({username:username})
             if(userDetails.hasAccess && userDetails.projectList.includes(req.params.projectName)){

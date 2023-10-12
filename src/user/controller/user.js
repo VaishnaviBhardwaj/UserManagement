@@ -118,7 +118,8 @@ async function grantAccess(req,res){
           return("No User Found");
         }
         userExist.projectList.push(projectname)
-        await User.update({username:username},userExist);
+        userExit.hasAccess = true
+        await User.findOneAndUpdate({username:username},userExist);
         let permissionUpdate  = await User.findOne({ username: username });
         return permissionUpdate;
       } catch (err) {
